@@ -14,8 +14,8 @@ const baseUrl = "https://api.rawg.io/api/games";
 const getGames = async function() {
     const params = {
         key: apiKey,
-        ordering: '-metacritic',  // Sort by metacritic score in descending order
-        page_size: 40,             // Number of results to fetch
+        ordering: '-metacritic',  
+        page_size: 40,             
     };
 
     try {
@@ -24,7 +24,6 @@ const getGames = async function() {
         const response = await fetch(url);
         const data = await response.json();
 
-        // Extract relevant information (e.g., title) from fetched games
         const topGames = data.results.map(game => {
             return {
                 title: game.name,
@@ -35,7 +34,6 @@ const getGames = async function() {
             };
         });
 
-        // Call function to display game titles
         showGames(topGames);
 
     } catch (error) {
@@ -45,26 +43,32 @@ const getGames = async function() {
 
 const showGames = function(games) {
     const gameContainer = document.querySelector('.game-range'); // Assuming you have a container with class 'game-range'
+    const stockImage = '/Img/stock.jpg'; // Path to your stock image
 
-    // Clear existing content (if any)
     gameContainer.innerHTML = '';
 
-    // Loop through the games array and create elements to display titles
     games.forEach(game => {
-        // Create a button element
         const button = document.createElement('button');
         button.className = 'c-game js-game';
-        button.style.backgroundImage = `url(${game.background_image})`; // Set the background image of the button
-        button.style.backgroundSize = 'cover'; // Make sure the background image covers the button    
-        // Create a span element for game title
+
+        const image = new Image();
+        image.onload = function() {
+            button.style.backgroundImage = `url(${game.background_image})`; // Set the background image of the button
+        };
+        image.onerror = function() {
+            console.log('Image not found');
+            button.style.backgroundImage = `url(${stockImage})`; // Set the stock image if the background image is not found
+        };
+        image.src = game.background_image;
+
+        button.style.backgroundSize = 'cover'; // Make sure the background image covers the button
+
         const span = document.createElement('span');
         span.className = 'c-title js-title';
         span.textContent = game.title; // Set the text content to the game title
 
-        // Append span to button
         button.appendChild(span);
 
-        // Append button to container
         gameContainer.appendChild(button);
     });
 };
@@ -90,14 +94,48 @@ function createGameButtons() {
   }
 
 
+const GetSearch = function () {
+    const search = document.querySelector('.js-search').value;
+    console.log(search)
+    try {
+        const url = new URL(baseUrl);
+        url.search = new URLSearchParams({key: apiKey, search: search}).toString();
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            const searchGames = data.results.map(game => {
+                return {
+                    title: game.name,
+                    rating: game.rating,
+                    metacritic: game.metacritic,
+                    released: game.released,
+                    background_image: game.background_image
+                };
+            });
+            showGames(searchGames)
+        })
+
+        
+}
+catch (error) {
+    console.log('An error occurred:', error);
+}
+}
+const ListenToSearch = function () {    
+    const searchButton = document.querySelector('.js-search-button');
+    searchButton.addEventListener('click', GetSearch);
+}
+
+
 
 
 
 const init = function(){
     // createGameButtons()
-
     listenToClick()
     getGames()
+    ListenToSearch()
+
 
 
 }
