@@ -488,6 +488,44 @@ a:focus {
 
 
 
+.c-search__container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.c-search__bar {
+    border: none;
+    padding: 10px;
+    flex-grow: 1;
+    outline: none;
+}
+
+.c-search-button {
+    background-color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.c-search-button svg {
+    width: 24px;
+    height: 24px;
+}
+
+.c-search-button:focus, .c-search__bar:focus {
+    outline: none;
+}
+
+/* Optional: Add hover effects for better UX */
+.c-search-button:hover {
+    background-color: #f0f0f0;
+}
 
 
 
