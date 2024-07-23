@@ -4,6 +4,9 @@ const listenToClick = async function() {
         if (clickedTitle){
             let gameTitle = clickedTitle.textContent;
             console.log(gameTitle)
+            let slug = clickedTitle.querySelector('.js-title').id;
+            getGameDetails(slug)
+
         }
     })
 }
@@ -30,7 +33,8 @@ const getGames = async function() {
                 rating: game.rating,
                 metacritic: game.metacritic,
                 released: game.released,
-                background_image: game.background_image
+                background_image: game.background_image,
+                slug: game.slug
             };
         });
 
@@ -40,6 +44,21 @@ const getGames = async function() {
         console.log('An error occurred:', error);
     }
 };
+
+const getGameDetails = function(gameTitle){
+    const apiURL = `https://api.rawg.io/api/games/${gameTitle}?key=${apiKey}`
+
+    fetch(apiURL)
+    .then(response => response.json())
+    .then(data => {
+        openModal(data)}
+    )
+    .catch(error =>{
+
+     console.log('An error occurred:', error)})
+
+}
+
 
 const showGames = function(games) {
     const gameContainer = document.querySelector('.game-range'); // Assuming you have a container with class 'game-range'
@@ -66,12 +85,15 @@ const showGames = function(games) {
         const span = document.createElement('span');
         span.className = 'c-title js-title';
         span.textContent = game.title; // Set the text content to the game title
-
+        span.id = game.slug;
         button.appendChild(span);
-
+        
         gameContainer.appendChild(button);
+
+        console.log(game.slug)
     });
 };
+
 
 
 
@@ -126,6 +148,37 @@ const ListenToSearch = function () {
     searchButton.addEventListener('click', GetSearch);
 }
 
+
+function setupModal() {
+    const modal = document.getElementById('modal');
+    const span = document.getElementsByClassName('close')[0];
+
+    span.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+}
+
+function openModal(game) {
+    console.log("HIIII")
+    console.log(game)
+    const modal = document.querySelector('.js-modal');
+    const modalInfo = document.querySelector('.js-modal-info');
+
+    modalInfo.innerHTML = `
+        <h2>${game}</h2>
+        <p>Released: ${game.released}</p>
+        <p>Rating: ${game.rating}</p>
+        <p>${game.description || 'No description available.'}</p>
+    `;
+
+    modal.style.display = 'block';
+}
 
 
 
