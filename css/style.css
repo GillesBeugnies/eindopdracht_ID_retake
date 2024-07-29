@@ -547,7 +547,7 @@ a:focus {
 
 
 .c-modal{
-    display: none;
+    /* display: none; */
     position: absolute;
     z-index: 2;
     width: 100%;
@@ -557,16 +557,26 @@ a:focus {
 }
 
 .c-modal-content{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content:space-evenly;
+    grid-template-columns: 2fr;
     background-color: #fefefe;
-    margin: 15% auto; 
+    margin: 20% auto; 
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-    max-width: 500px;
     position: relative;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     animation: zoom 0.3s;
+}
+
+.c-modal-details{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
 }
 
 

@@ -51,7 +51,8 @@ const getGameDetails = function(gameTitle){
     fetch(apiURL)
     .then(response => response.json())
     .then(data => {
-        openModal(data)}
+        openModal(data)
+        console.log(data)}
     )
     .catch(error =>{
 
@@ -168,15 +169,34 @@ function openModal(game) {
     console.log("HIIII")
     console.log(game)
     const modal = document.querySelector('.js-modal');
-    const modalInfo = document.querySelector('.js-modal-info');
+    const modalTitle = document.querySelector('.js-modal-title');
+    const modalImage = document.querySelector('.js-modal-image');
+    const modalRating = document.querySelector('.js-modal-rating');
+    const modalMetacritic = document.querySelector('.js-modal-metacritic');
+    const modalReleased = document.querySelector('.js-modal-released');
+    const modalDescription = document.querySelector('.js-modal-description');
+    const modalGenres = document.querySelector('.js-modal-genres');
+    const modalPlatforms = document.querySelector('.js-modal-platforms');
+    const modalWebsite = document.querySelector('.js-modal-website-link')
+    modalWebsite.href = game.website;
+    modalReleased.innerHTML = game.released;
+    modalRating.innerHTML = game.rating;
+    modalTitle.innerHTML = game.name;
+    modalDescription.innerHTML = game.description;
 
-    modalInfo.innerHTML = `
-        <h2>${game}</h2>
-        <p>Released: ${game.released}</p>
-        <p>Rating: ${game.rating}</p>
-        <p>${game.description || 'No description available.'}</p>
-    `;
-
+    // modalPlatforms.innerHTML = game.platforms.map(platform => platform.platform.name).join(', ');
+    let genresHTML = '';
+    game.genres.forEach(genre => {
+      genresHTML += `<li>${genre.name}</li>`;
+    });
+    let platformsHTML = '';
+    game.platforms.forEach(platform => {
+      platformsHTML += `<li>${platform.platform.name}</li>`;
+    });
+    
+    // Set the innerHTML of the genres list
+    modalGenres.innerHTML = genresHTML;    
+    modalPlatforms.innerHTML = platformsHTML;
     modal.style.display = 'block';
 }
 
