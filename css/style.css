@@ -458,6 +458,21 @@ a:focus {
     Card with box shadow
 */
 
+.c-loading_screen{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    font-size: 2rem;
+    
+}
+
+.c-body{
+    display: none;
+}
+
 
 
 
@@ -587,6 +602,52 @@ a:focus {
 
 
 
+@keyframes dot-blink {
+    0% {
+        content: "";
+    }
+    25% {
+        content: ".";
+    }
+    50% {
+        content: "..";
+    }
+    75% {
+        content: "...";
+    }
+    100% {
+        content: "";
+    }
+}
+
+.dots::after {
+    content: "";
+    animation: dot-blink 1.5s steps(4, end) infinite;
+}
+
+/* Animation to spin the SVG faster */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Animation to spin the SVG */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.svg-loadeing {
+    animation: spin 1s linear infinite;
+}
+
 /*
     Component: Forms
     ---
@@ -599,13 +660,57 @@ a:focus {
     Class to put on all input="text" like form inputs
 */
 
+.c-filters{
+    display: flex;
+    padding: 0rem, 1rem, 0rem, 1rem;
+    gap: 1rem;
+}
+
 .c-input {
+
+    width: 10%;
+    padding: 12px 20px; /* More padding for a modern look */
+    border: 1px solid #ccc;
+    border-radius: 12px; /* Rounder corners */
+    font-size: 16px;
+    background-color: #fff;
+    appearance: none; /* Remove default styling for select */
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for a modern touch */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition */
 
 }
 
 .c-input:focus {
+    border-color: pink;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.c-custom-select {
+    position: relative;
+    display: block;
+    width: 300px; /* Set desired width */
+}
+
+/* Custom dropdown symbol styling */
+.c-custom-select__symbol {
+    position: absolute;
+    top: 50%;
+    right: 15px; /* Adjust based on padding */
+    transform: translateY(-50%);
+    font-size: 16px; /* Adjust as needed */
+    color: #333; /* Fill color */
+    pointer-events: none; /* Prevents interference with select */
+}
+
+/* Ensure the select element covers the entire container */
+.c-custom-select select {
+    width: 100%;
+    padding-right: 40px; /* Account for the width of the custom symbol */
+    border: none; /* Remove default border */
+    border-radius: 12px; /* Match border radius with the container */
+    background-color: transparent; /* Ensure background is transparent */
+}
 /*
     Component: Label
     ---

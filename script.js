@@ -62,8 +62,19 @@ const getGameDetails = function(gameTitle){
 
 
 const showGames = function(games) {
-    const gameContainer = document.querySelector('.game-range'); // Assuming you have a container with class 'game-range'
-    const stockImage = '/Img/stock.jpg'; // Path to your stock image
+    const gameContainer = document.querySelector('.game-range'); 
+    const stockImage = '/Img/stock.jpg'; 
+
+    let loadedImages = 0;
+    const totalImages = games.length;
+
+    const checkIfAllImagesLoaded = () => {
+        loadedImages++;
+        if (loadedImages === totalImages) {
+            document.querySelector('.js-loading-screen').style.display = 'none';
+            document.querySelector('.c-body').style.display = 'block';
+        }
+    };
 
     gameContainer.innerHTML = '';
 
@@ -73,19 +84,21 @@ const showGames = function(games) {
 
         const image = new Image();
         image.onload = function() {
-            button.style.backgroundImage = `url(${game.background_image})`; // Set the background image of the button
+            button.style.backgroundImage = `url(${game.background_image})`; 
+            checkIfAllImagesLoaded(); 
         };
         image.onerror = function() {
             console.log('Image not found');
-            button.style.backgroundImage = `url(${stockImage})`; // Set the stock image if the background image is not found
+            button.style.backgroundImage = `url(${stockImage})`; 
+            checkIfAllImagesLoaded(); 
         };
         image.src = game.background_image;
 
-        button.style.backgroundSize = 'cover'; // Make sure the background image covers the button
+        button.style.backgroundSize = 'cover'; 
 
         const span = document.createElement('span');
         span.className = 'c-title js-title';
-        span.textContent = game.title; // Set the text content to the game title
+        span.textContent = game.title; 
         span.id = game.slug;
         button.appendChild(span);
         
@@ -94,8 +107,6 @@ const showGames = function(games) {
         console.log(game.slug)
     });
 };
-
-
 
 
 
