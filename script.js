@@ -52,7 +52,9 @@ const getGameDetails = function(gameTitle){
     .then(response => response.json())
     .then(data => {
         openModal(data)
+        getPlatforms()
         console.log(data)}
+        
     )
     .catch(error =>{
 
@@ -126,6 +128,46 @@ function createGameButtons() {
       container.appendChild(button);
     }
   }
+
+
+const getPlatforms = function(){
+    const platform = document.querySelector('.js-modal-platforms')
+    const platforms = platform.querySelectorAll('li')
+
+    const platformlogos = {
+        'Nintendo Switch': '',
+        'Playstation 5': '',
+        'PlayStation 4': '',
+        'PlayStation 3': '',
+        'PlayStation 2': '',
+        'PlayStation 1': '',
+        'Xbox One': '',
+        'Xbox 360': '',
+        'Xbox': '',
+        'PC': '',
+        'iOS': '',
+        'Android': '',
+        'macOS': '',
+        'Linux': '',
+        'Nintendo 64': '',
+        'Nintendo DS': '',
+        'Nintendo 3DS': '',
+        'Nintendo GameCube': '',
+        'Nintendo Wii': '',
+        'Nintendo Wii U': ''
+
+    }
+
+
+    platforms.forEach(platform => {
+        const platformName = platform.textContent.trim();
+        if (platformlogos[platformName]) {
+            platform.innerHTML = platformlogos[platformName];
+        }
+    });
+
+}
+
 
 
 const GetSearch = function () {
