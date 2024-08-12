@@ -14,12 +14,20 @@ const listenToClick = async function() {
 const apiKey = "a839e6bdc7604e56bc2b77e17b377309";
 const baseUrl = "https://api.rawg.io/api/games";
 
-const getGames = async function() {
+const getGames = async function(platformId, genreId) {
     const params = {
         key: apiKey,
-        ordering: '-metacritic',  
-        page_size: 40,             
+        ordering: '-metacritic',
+        page_size: 40
     };
+
+    if (platformId) {
+        params.platforms = platformId;
+    }
+
+    if (genreId) {
+        params.genres = genreId;
+    }
 
     try {
         const url = new URL(baseUrl);
@@ -44,6 +52,63 @@ const getGames = async function() {
         console.log('An error occurred:', error);
     }
 };
+
+
+
+let selectedPlatformId = null;
+let selectedGenreId = null;
+
+const listentoPlatformfilter = function() {
+    const platformfilter = document.querySelector('.js-platform-filter');
+    platformfilter.addEventListener('change', function(){
+        console.log('Platform filter changed');
+        const platformMap = {
+            'platform1': 18,   // PlayStation 4
+            'platform2': 4,    // PC
+            'platform3': 7,    // Nintendo Switch
+            'platform4': 1     // Xbox One
+        };
+
+        const selectedPlatform = this.value;
+
+        if (selectedPlatform === 'all') {
+            selectedPlatformId = null;
+        } else {
+            selectedPlatformId = platformMap[selectedPlatform];
+        }
+
+        // Fetch games based on the currently selected platform and genre
+        getGames(selectedPlatformId, selectedGenreId);
+    });
+}
+
+const listentoGenreFilter = function() { 
+    const genrefilter = document.querySelector('.js-genre-filter');
+    genrefilter.addEventListener('change', function() {
+        console.log('Genre filter changed');
+        const genreMap = {
+            'genre1': 4,  // Action
+            'genre2': 5,  // RPG
+            'genre3': 2,  // Shooter
+            'genre4': 3   // Adventure
+        };
+    
+        const selectedGenre = this.value;
+        selectedGenreId = genreMap[selectedGenre] || null;
+    
+        // Fetch games based on the currently selected platform and genre
+        getGames(selectedPlatformId, selectedGenreId);
+    });
+}
+
+
+// function handlePlatformClick(event) {
+//     const platformId = event.target.dataset.platformId;
+
+//     if (platformId) {
+//         getGames(platformId);
+//     }
+// }    
 
 const getGameDetails = function(gameTitle){
     const apiURL = `https://api.rawg.io/api/games/${gameTitle}?key=${apiKey}`
@@ -140,6 +205,9 @@ const showchart = function()
 }
 
 
+
+
+
 const showGames = function(games) {
     const gameContainer = document.querySelector('.game-range'); 
     const stockImage = '/Img/stock.jpg'; 
@@ -205,6 +273,10 @@ function createGameButtons() {
       container.appendChild(button);
     }
   }
+
+
+
+
 
 
 const getPlatforms = function(){
@@ -339,6 +411,8 @@ const init = function(){
     listenToClick()
     getGames()
     ListenToSearch()
+    listentoPlatformfilter()
+    listentoGenreFilter()
 
 
 
