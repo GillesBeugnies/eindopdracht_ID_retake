@@ -62,6 +62,83 @@ const getGameDetails = function(gameTitle){
 
 }
 
+const showchart = function()
+{
+    const ratings = [
+        { id: 1, title: "skip", count: 9 },
+        { id: 3, title: "meh", count: 16 },
+        { id: 4, title: "recommended", count: 51 },
+        { id: 5, title: "exceptional", count: 397 }
+    ];
+
+    const ctx = document.querySelector('.js-modal-rating-chart').getContext('2d');
+    const ratingsChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Ratings'], // Single bar for stacking
+            datasets: [
+                {
+                    label: 'Skip',
+                    data: [ratings[0].count],
+                    backgroundColor: '#FF3B30', // Red
+                },
+                {
+                    label: 'Meh',
+                    data: [ratings[1].count],
+                    backgroundColor: '#FFCC00', // Yellow
+                },
+                {
+                    label: 'Recommended',
+                    data: [ratings[2].count],
+                    backgroundColor: '#4CD964', // Green
+                },
+                {
+                    label: 'Exceptional',
+                    data: [ratings[3].count],
+                    backgroundColor: '#007AFF', // Blue
+                }
+            ]
+        },
+        options: {
+            indexAxis: 'y', // Horizontal bar
+            scales: {
+                x: {
+                    stacked: true,
+                    display: false // Hide x-axis
+                },
+                y: {
+                    stacked: true,
+                    display: false // Hide y-axis
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom' // Legend at the bottom
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return tooltipItem.dataset.label + ': ' + tooltipItem.raw;
+                        }
+                    }
+                }
+            },
+            layout: {
+                padding: {
+                    left: 0,
+                    right: 0,
+                    top: 10,
+                    bottom: 0
+                }
+            },
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+
+}
+
 
 const showGames = function(games) {
     const gameContainer = document.querySelector('.game-range'); 
@@ -251,6 +328,7 @@ function openModal(game) {
     modalGenres.innerHTML = genresHTML;    
     modalPlatforms.innerHTML = platformsHTML;
     modal.style.display = 'block';
+    showchart()
 }
 
 
