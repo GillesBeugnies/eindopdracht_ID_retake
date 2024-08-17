@@ -407,7 +407,7 @@ function openModal(game) {
 
 
 const init = function(){
-    // createGameButtons()
+    createGameButtons()
     listenToClick()
     getGames()
     ListenToSearch()

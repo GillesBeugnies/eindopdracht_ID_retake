@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="c-loading_screen js-loading-screen">
+    <div class="c-loading_screen js-loading-screen ">
         <p>Loading<span class="dots">...</span></p>
         <div class="spinner-container">
             <svg class="svg-loadeing" width="100px" height="100px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,9 +25,9 @@
         
         <header class="o-row">
             <div class="c-header">
-            <div class="c-logo-cointainer"> </div>
+           
             <div class="c-search">
-                <div class="c-search__wrapper">
+                
                     <div class="c-search__container">
 
                     <input type="text"  class="js-search c-search__bar" placeholder="Search for your favorite Game">
@@ -35,9 +35,9 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="#000000" viewBox="0 0 256 256"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path></svg>
                     </button>
                     </div>
-                </div>
+                
             </div>  
-            </div>
+            
             <div class="c-filters">
                 <div class="c-custom-select">
                     <select class="c-input js-platform-filter">
@@ -51,7 +51,7 @@
                     </select>
                     <span class="c-custom-select__symbol">&#9662;</span>
                 </div>
-                <div>
+                
                     <div class="c-custom-select">
                         <select class="c-input js-genre-filter ">
                             <option value="all">All</option>
@@ -65,6 +65,7 @@
                         </select>
                         <span class="c-custom-select__symbol">&#9662;</span>
                     </div>
+            </div>
             </div>
         </header>
 
@@ -83,17 +84,35 @@
         </main>
         <div class="c-modal js-modal">
             <div class="c-modal-content">
-                <div class="c-modal-title-description">
+                <div class="c-modal-box">
+                <!-- <div class="c-header-modal" -->
+                 <div class="c-modal-header">
+                <div class="c-header-modal-image">
+                    <img src="https://via.placeholder.com/150" alt="Game1" class="c-modal-image js-modal-image">
+
+                </div>
+
+                <div class="c-header-title">
                     <h2 class="c-modal-title js-modal-title">Game1</h2>
+                    <a href="" class="c-modal-website-link js-modal-website-link">Website</a>
+
+
+                </div>
+
+                </div>
+                <!-- <div class="c-modal-body"> -->
+                <div class="c-modal-title-description">
+                    <h3>Description</h3>
                     <p class="c-modal-description js-modal-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>
                 </div>
+
+
+
+                <h3 class="">Details</h3>
                 <div class="c-modal-details">
-                    <div class="c-modal-images">
-                        <img src="" alt="" class="c-modal-image js-modal-image">
-                        <img src="" alt="" class="c-modal-image js-modal-image">
-                    </div>
+                    
                     <div class="c-modal-platforms">
-                        <h3>Platforms</h3>
+                        <h4>Platforms</h4>
                         <ul class="c-modal-platforms-list js-modal-platforms">
                             <li>Platform1</li>
                             <li>Platform2</li>
@@ -101,7 +120,7 @@
                         </ul>
                     </div>
                     <div class="c-modal-genres">
-                        <h3>Genres</h3>
+                        <h4>Genres</h4>
                         <ul class="c-modal-genres-list js-modal-genres">
                             <li>Genre1</li>
                             <li>Genre2</li>
@@ -112,23 +131,23 @@
                         <h3>Release Date</h3>
                         <p class="c-modal-release-date js-modal-released">Release Date</p>
                     </div>
+
                     <div class="c-modal-rating">
                         
                         <h3>Rating</h3>
-                        <div>
-                        <p class="c-modal-rating-score js-modal-rating">Rating</p>
-                        </div>
-                        <div>
-                            <canvas class="c-modal-rating-chart js-modal-rating-chart"></canvas>
+                         <p class="c-modal-rating-score js-modal-rating">Rating</p>
+                       
+                            <!-- <canvas class="c-modal-rating-chart js-modal-rating-chart"></canvas> -->
 
-                        </div>
+                       
+
+                </div>
+            </div>
+                    
                     </div>
 
-                    </div>
-                    <div class="c-modal-website">
-                        <h3>Website</h3>
-                        <a href="" class="c-modal-website-link js-modal-website-link">Website</a>
-                    </div>
+            
+                    
                 </div>
                 
             </div>
