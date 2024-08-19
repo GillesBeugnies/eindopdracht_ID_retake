@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/normalize.css">
+
 </head>
 <body>
     <div class="c-loading_screen js-loading-screen ">
@@ -23,7 +25,7 @@
         
         
         
-        <header class="o-row">
+        <header>
             <div class="c-header">
            
             <div class="c-search">
@@ -52,19 +54,28 @@
                     <span class="c-custom-select__symbol">&#9662;</span>
                 </div>
                 
-                    <div class="c-custom-select">
-                        <select class="c-input js-genre-filter ">
-                            <option value="all">All</option>
-                            <option value="genre1">Action</option>
-                            <option value="genre2">RPG</option>
-                            <option value="genre3">Shooter</option>
-                            <option value="genre4">Adventure</option>
-
-                            
-    
-                        </select>
-                        <span class="c-custom-select__symbol">&#9662;</span>
-                    </div>
+                <div class="c-custom-select">
+                    <select class="c-input js-genre-filter">
+                        <option value="all">All</option>
+                        <option value="adventure">Adventure</option>
+                        <option value="action">Action</option>
+                        <option value="fighting">Fighting</option>
+                        <option value="horror">Horror</option>
+                        <option value="mmo">MMO</option>
+                        <option value="platformer">Platformer</option>
+                        <option value="puzzle">Puzzle</option>
+                        <option value="racing">Racing</option>
+                        <option value="rhythm">Rhythm</option>
+                        <option value="rpg">RPG</option>
+                        <option value="sandbox">Sandbox</option>
+                        <option value="simulation">Simulation</option>
+                        <option value="sports">Sports</option>
+                        <option value="strategy">Strategy</option>
+                        <option value="survival">Survival</option>
+                    </select>
+                    <span class="c-custom-select__symbol">&#9662;</span>
+                </div>
+                
             </div>
             </div>
         </header>
@@ -81,80 +92,90 @@
 
             </div>
 
-        </main>
-        <div class="c-modal js-modal">
-            <div class="c-modal-content">
-                <div class="c-modal-box">
-                <!-- <div class="c-header-modal" -->
-                 <div class="c-modal-header">
-                <div class="c-header-modal-image">
-                    <img src="https://via.placeholder.com/150" alt="Game1" class="c-modal-image js-modal-image">
-
-                </div>
-
-                <div class="c-header-title">
-                    <h2 class="c-modal-title js-modal-title">Game1</h2>
-                    <a href="" class="c-modal-website-link js-modal-website-link">Website</a>
-
-
-                </div>
-
-                </div>
-                <!-- <div class="c-modal-body"> -->
-                <div class="c-modal-title-description">
-                    <h3>Description</h3>
-                    <p class="c-modal-description js-modal-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>
-                </div>
-
-
-
-                <h3 class="">Details</h3>
-                <div class="c-modal-details">
-                    
-                    <div class="c-modal-platforms">
-                        <h4>Platforms</h4>
-                        <ul class="c-modal-platforms-list js-modal-platforms">
-                            <li>Platform1</li>
-                            <li>Platform2</li>
-                            <li>Platform3</li>
-                        </ul>
+            <div class="c-modal js-modal">
+                <div class="c-modal-content">
+                    <div class="c-modal-box">
+                    <!-- <div class="c-header-modal" -->
+                     <div class="c-modal-header">
+                    <div class="c-header-modal-image">
+                        <img src="https://via.placeholder.com/150" alt="Game1" class="c-modal-image js-modal-image">
+    
                     </div>
-                    <div class="c-modal-genres">
-                        <h4>Genres</h4>
-                        <ul class="c-modal-genres-list js-modal-genres">
-                            <li>Genre1</li>
-                            <li>Genre2</li>
-
-                        </ul>
+    
+                    <div class="c-header-title">
+                        <h2 class="c-modal-title js-modal-title">Game1</h2>
+                        <a href="" class="c-modal-website-link js-modal-website-link">Website</a>
+    
+    
                     </div>
-                    <div class="c-modal-release">
-                        <h3>Release Date</h3>
-                        <p class="c-modal-release-date js-modal-released">Release Date</p>
+                    <button class="c-modal-close js-modal-close">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"></svg>
+                    </button>
+    
                     </div>
-
-                    <div class="c-modal-rating">
+                    <!-- <div class="c-modal-body"> -->
+                    <div class="c-modal-title-description">
+                        <h3>Description</h3>
+                        <p class="c-modal-description js-modal-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>
+                    </div>
+    
+    
+    
+                    <h3 class="">Details</h3>
+                    <div class="c-modal-details">
                         
-                        <h3>Rating</h3>
-                         <p class="c-modal-rating-score js-modal-rating">Rating</p>
-                       
-                            <!-- <canvas class="c-modal-rating-chart js-modal-rating-chart"></canvas> -->
-
-                       
-
+                        <div class="c-modal-platforms">
+                            <h4>Platforms</h4>
+                            <ul class="c-modal-platforms-list js-modal-platforms">
+                                <li>Platform1</li>
+                                <li>Platform2</li>
+                                <li>Platform3</li>
+                            </ul>
+                        </div>
+                        <div class="c-modal-genres">
+                            <h4>Genres</h4>
+                            <ul class="c-modal-genres-list js-modal-genres">
+                                <li>Genre1</li>
+                                <li>Genre2</li>
+    
+                            </ul>
+                        </div>
+                        <div class="c-modal-release">
+                            <h3>Release Date</h3>
+                            <p class="c-modal-release-date js-modal-released">Release Date</p>
+                        </div>
+    
+                        
                 </div>
-            </div>
-                    
+                        
+                <div class="c-modal-rating">
+                            
+                    <h3>Rating</h3>
+                    <canvas class="c-modal-rating-chart js-modal-rating-chart"></canvas>
+                    <div class="c-modal-score">
+                    <p class="c-modal-rating-score js-modal-rating"></p>
+                    <div class="js-stars">
+    
                     </div>
-
-            
+                    <p class="c-modal-rating-metacritic js-modal-metacritic"></p>
+                </div>
+                   
+                   
+                </div>
+                        </div>
+    
+                
+                        
+                    </div>
                     
                 </div>
-                
             </div>
-        </div>
+
+        </main>
+        
        
 
-    </div>
+    <!-- </div> -->
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>

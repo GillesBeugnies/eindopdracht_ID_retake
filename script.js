@@ -127,8 +127,9 @@ const getGameDetails = function(gameTitle){
 
 }
 
-const showchart = function()
-{
+let ratingsChart; // Declare the chart variable outside the function
+
+const showchart = function() {
     const ratings = [
         { id: 1, title: "skip", count: 9 },
         { id: 3, title: "meh", count: 16 },
@@ -137,7 +138,14 @@ const showchart = function()
     ];
 
     const ctx = document.querySelector('.js-modal-rating-chart').getContext('2d');
-    const ratingsChart = new Chart(ctx, {
+
+    // Destroy the previous chart instance if it exists
+    if (ratingsChart) {
+        ratingsChart.destroy();
+    }
+
+    // Create a new chart instance
+    ratingsChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: ['Ratings'], // Single bar for stacking
@@ -201,8 +209,8 @@ const showchart = function()
             maintainAspectRatio: false
         }
     });
-
 }
+
 
 
 
@@ -254,6 +262,9 @@ const showGames = function(games) {
         console.log(game.slug)
     });
 };
+
+///html performanter maken door alles in 1 string te dan alles apart appendemn dus het geheel in 1 keer toevoegen
+
 
 
 
@@ -339,6 +350,7 @@ const GetSearch = function () {
             });
             showGames(searchGames)
         })
+        
 
         
 }
@@ -380,33 +392,72 @@ function openModal(game) {
     const modalGenres = document.querySelector('.js-modal-genres');
     const modalPlatforms = document.querySelector('.js-modal-platforms');
     const modalWebsite = document.querySelector('.js-modal-website-link')
+    const body = document.querySelector('body');
+    body.style.overflow = 'hidden';
     modalWebsite.href = game.website;
     modalReleased.innerHTML = game.released;
     modalRating.innerHTML = game.rating;
     modalTitle.innerHTML = game.name;
     modalDescription.innerHTML = game.description;
+    modalMetacritic.innerHTML = game.metacritic;
 
-    // modalPlatforms.innerHTML = game.platforms.map(platform => platform.platform.name).join(', ');
+    // Dynamic background color for Metacritic score
+    const metacriticScore = game.metacritic;
+    if (metacriticScore >= 70) {
+        modalMetacritic.style.backgroundColor = 'green';
+    } else if (metacriticScore >= 50) {
+        modalMetacritic.style.backgroundColor = 'orange';
+    } else {
+        modalMetacritic.style.backgroundColor = 'red';
+    }
+
+    // Generate genres list
     let genresHTML = '';
     game.genres.forEach(genre => {
       genresHTML += `<li>${genre.name}</li>`;
     });
+    // Generate platforms list
     let platformsHTML = '';
     game.platforms.forEach(platform => {
       platformsHTML += `<li>${platform.platform.name}</li>`;
     });
     
-    // Set the innerHTML of the genres list
+    // Set the innerHTML of the genres and platforms lists
     modalGenres.innerHTML = genresHTML;    
     modalPlatforms.innerHTML = platformsHTML;
-    modal.style.display = 'block';
-    showchart()
+    
+    // Display the modal
+    modal.style.display = 'flex';
+    
+    // Call the showchart function
+    showchart();
+
+
+        
 }
+
+const closeModal = function() {
+    const modal = document.querySelector('.js-modal');
+    modal.style.display = 'none';
+    const body = document.querySelector('body');
+    body.style.overflow = 'auto';
+}
+
+const listentoclose = function() {
+    const closeButton = document.querySelector('.js-modal-close')
+    closeButton.addEventListener('click', closeModal)
+}
+
+///on close overflow body auto
+
+//todo add escape or click ernaast
+
 
 
 
 
 const init = function(){
+    listentoclose()
     createGameButtons()
     listenToClick()
     getGames()
