@@ -241,6 +241,10 @@ const showchart = function(dynamicratings) {
 
 
 const showGames = function(games) {
+    for (game of games) {
+    console.log(game);
+    
+    }
     const gameContainer = document.querySelector('.game-range'); 
     const stockImage = '/Img/stock.jpg'; 
 
@@ -354,34 +358,79 @@ function createGameButtons() {
 
 
 
-const GetSearch = function () {
+// const GetSearch = function () {
+//     const search = document.querySelector('.js-search').value;
+//     console.log(search)
+//     try {
+//         const url = new URL(baseUrl);
+//         url.search = new URLSearchParams({key: apiKey, search: search}).toString();
+//         fetch(url)
+//         .then(response => response.json())
+//         .then(data => {
+//             const searchGames = data.results.map(game => {
+//                 return {
+//                     title: game.name,
+//                     rating: game.rating,
+//                     metacritic: game.metacritic,
+//                     released: game.released,
+//                     background_image: game.background_image
+//                 };
+//             });
+//             showGames(searchGames)
+//         })
+        
+
+        
+// }
+// catch (error) {
+//     console.log('An error occurred:', error);
+// }
+// }
+
+
+const GetSearch = async function () {
     const search = document.querySelector('.js-search').value;
-    console.log(search)
+    console.log(search);
+
     try {
-        const url = new URL(baseUrl);
-        url.search = new URLSearchParams({key: apiKey, search: search}).toString();
-        fetch(url)
-        .then(response => response.json())
-        .then(data => {
+        const allGames = [];
+        let url = new URL(baseUrl);
+        url.search = new URLSearchParams({ key: apiKey, search: search }).toString();
+
+        while (url && allGames.length < 40) { // Check if we have less than 40 games
+            const response = await fetch(url);
+            const data = await response.json();
+
             const searchGames = data.results.map(game => {
                 return {
                     title: game.name,
+                    slug: game.slug, // Add the slug here
                     rating: game.rating,
                     metacritic: game.metacritic,
                     released: game.released,
                     background_image: game.background_image
                 };
             });
-            showGames(searchGames)
-        })
-        
 
-        
-}
-catch (error) {
-    console.log('An error occurred:', error);
-}
-}
+            allGames.push(...searchGames.slice(0, 40 - allGames.length));
+
+            url = data.next; 
+
+            if (!url) break;
+        }
+
+        console.log(allGames);
+        showGames(allGames);
+
+    } catch (error) {
+        console.error('Error fetching games:', error);
+    }
+};
+
+
+
+
+
 const ListenToSearch = function () {    
     const searchButton = document.querySelector('.js-search-button');
     searchButton.addEventListener('click', GetSearch);
