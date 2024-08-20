@@ -12,7 +12,7 @@ const listenToClick = async function() {
 }
 
 const apiKey = "a839e6bdc7604e56bc2b77e17b377309";
-const baseUrl = "https://api.rawg.io/api/games";
+let baseUrl = "https://api.rawg.io/api/games";
 
 const getGames = async function(platformId, genreId) {
     const params = {
@@ -34,6 +34,7 @@ const getGames = async function(platformId, genreId) {
         url.search = new URLSearchParams(params).toString();
         const response = await fetch(url);
         const data = await response.json();
+        console.log(url.search);
 
         const topGames = data.results.map(game => {
             return {
@@ -87,14 +88,26 @@ const listentoGenreFilter = function() {
     genrefilter.addEventListener('change', function() {
         console.log('Genre filter changed');
         const genreMap = {
-            'genre1': 4,  // Action
-            'genre2': 5,  // RPG
-            'genre3': 2,  // Shooter
-            'genre4': 3   // Adventure
+            'action': 4,  // Action
+            'adventure': 3,  
+            'fighting': 6,  // Shooter
+            'indie': 51,
+            'mmo': 59,
+            'platformer': 83,
+            'puzzle': 7,
+            'racing':1,
+            'rpg':5,
+            'simulation': 14,
+            'sports': 15,
+            'strategy': 10
+
         };
+
     
         const selectedGenre = this.value;
         selectedGenreId = genreMap[selectedGenre] || null;
+        console.log("HIIIII")
+        console.log(selectedGenreId);    
     
         // Fetch games based on the currently selected platform and genre
         getGames(selectedPlatformId, selectedGenreId);
