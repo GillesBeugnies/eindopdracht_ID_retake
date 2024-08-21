@@ -67,10 +67,10 @@ const listentoPlatformfilter = function() {
     platformfilter.addEventListener('change', function(){
         console.log('Platform filter changed');
         const platformMap = {
-            'platform1': 18,   // PlayStation 4
+            'platform1': 187,   // PlayStation 5
             'platform2': 4,    // PC
             'platform3': 7,    // Nintendo Switch
-            'platform4': 1     // Xbox One
+            'platform4': 186     // Xbox series/s
         };
 
         const selectedPlatform = this.value;
@@ -131,11 +131,6 @@ const listentofavoritefilter = function() {
         showfavorites(storefavorites);
     });
 }
-
-// Example usage:
-// listentofavoriteadd('example-slug');
-
-
 
 
 
@@ -201,15 +196,6 @@ const listentoGenreFilter = function() {
         getGames(selectedPlatformId, selectedGenreId);
     });
 }
-
-
-// function handlePlatformClick(event) {
-//     const platformId = event.target.dataset.platformId;
-
-//     if (platformId) {
-//         getGames(platformId);
-//     }
-// }    
 
 const getGameDetails = function(gameTitle){
     const apiURL = `https://api.rawg.io/api/games/${gameTitle}?key=${apiKey}`
@@ -459,38 +445,6 @@ function createGameButtons() {
 
 }
 
-
-
-// const GetSearch = function () {
-//     const search = document.querySelector('.js-search').value;
-//     console.log(search)
-//     try {
-//         const url = new URL(baseUrl);
-//         url.search = new URLSearchParams({key: apiKey, search: search}).toString();
-//         fetch(url)
-//         .then(response => response.json())
-//         .then(data => {
-//             const searchGames = data.results.map(game => {
-//                 return {
-//                     title: game.name,
-//                     rating: game.rating,
-//                     metacritic: game.metacritic,
-//                     released: game.released,
-//                     background_image: game.background_image
-//                 };
-//             });
-//             showGames(searchGames)
-//         })
-        
-
-        
-// }
-// catch (error) {
-//     console.log('An error occurred:', error);
-// }
-// }
-
-
 const GetSearch = async function () {
     const search = document.querySelector('.js-search').value;
     console.log(search);
@@ -550,10 +504,10 @@ const listentodarkMode = function ()
         console.log("HIIII")
         // Toggle between black and original color
         document.body.classList.toggle('dark-mode');
-        if (svgPath.style.fill === 'red') {
-            svgPath.style.fill = '#010002'; // Original color
+        if (svgPath.style.fill === 'white') {
+            svgPath.style.fill = 'black'; // Original color
         } else {
-            svgPath.style.fill = 'red';
+            svgPath.style.fill = 'white'; // 
         }
     });
 
@@ -591,6 +545,13 @@ function openModal(game) {
     body.style.overflow = 'hidden';
     modalImage.src = game.background_image;
     modalWebsite.href = game.website;
+
+    if (game.website == "") {
+        modalWebsite.style.display = 'none';
+    } 
+    else {
+        modalWebsite.style.display = 'block';
+    }
     let releasedate = game.released;
     europeanDate = releasedate.split('-').reverse().join('-');
     modalReleased.innerHTML = europeanDate;

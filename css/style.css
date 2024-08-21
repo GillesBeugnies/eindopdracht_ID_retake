@@ -53,18 +53,12 @@
 --global-font-family: 'Inter', sans-serif;
 
 
---spotify-green: #1ed760;
     --spotify-black: #121212;
-    --spotify-white: #ffffff;
-    --spotify-grey: #b3b3b3;
-    --spotify-darkGrey: #222222;
+    
 
-    --global-fontFam: 'Manrope', sans-serif;
 
-    --global-space-s: 1rem;
-    --global-space-m: 1.5rem;
+  
 
-    --currentColor: var(--spotify-white);
 
 
 }
@@ -656,6 +650,7 @@ body.dark-mode .c-modal-content {
     gap: 2rem;
     max-width: 100%;
     box-sizing: border-box;
+    padding: var(--global-whitespace-md)
 
 }
 
