@@ -23,6 +23,8 @@
   --global-color-neutral-900: #35374D;
   --global-color-neutral-950: #20223A;
 
+  --global-color-neutral-1000:var(--spotify-black);
+
   --global-border-width: 1px;
     --global-border-radius: 8px;
     --global-border-radius-sm: 6px;
@@ -50,6 +52,19 @@
 
 --global-font-family: 'Inter', sans-serif;
 
+
+--spotify-green: #1ed760;
+    --spotify-black: #121212;
+    --spotify-white: #ffffff;
+    --spotify-grey: #b3b3b3;
+    --spotify-darkGrey: #222222;
+
+    --global-fontFam: 'Manrope', sans-serif;
+
+    --global-space-s: 1rem;
+    --global-space-m: 1.5rem;
+
+    --currentColor: var(--spotify-white);
 
 
 }
@@ -97,7 +112,7 @@ html {
 }
 
 ::selection {
-    background: HotPink;
+    background: darkblue;
     color: white;
     text-shadow: none;
 }
@@ -112,8 +127,15 @@ Elements: Images
 Default markup for images to make them responsive
 */
 
+
+
 img {
     
+}
+
+svg{
+    max-width: 100%;
+    height: auto;
 }
 
 /*
@@ -219,6 +241,43 @@ a:focus {
     color: DeepPink;
 }
 
+
+
+.toggle {
+    display: grid;
+    place-items: center;
+
+    & .toggle__icon {
+        grid-column: 1;
+        grid-row: 1;
+        transition: transform 0.3s ease, opacity 0.3s ease;  
+    }
+    
+    & .icon--add {
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+
+    & .icon--check {
+        opacity: 0;
+        transform: rotate(90deg);
+        fill: var(--spotify-green);
+        stroke: var(--spotify-green);
+    }
+
+    &.added {
+        & .icon--add {
+            opacity: 0;
+            transform: rotate(90deg);
+        }
+        & .icon--check {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+    }
+}
+
+
 /*------------------------------------*\
 #OBJECTS
 \*------------------------------------*/
@@ -228,6 +287,30 @@ a:focus {
     ---
     Creates a horizontal row that stretches the viewport and adds padding around children
 */
+
+.button-reset {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+    background: transparent;
+
+    /* inherit font & color from ancestor */
+    color: inherit;
+    font: inherit;
+
+    /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+    line-height: normal;
+
+    /* Corrects font smoothing for webkit */
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+
+    /* Corrects inability to style clickable `input` types in iOS */
+    -webkit-appearance: none;
+}
+
 
 .o-row {
     position: relative;
@@ -486,6 +569,31 @@ a:focus {
     Card with box shadow
 */
 
+@media (max-width: 600px) {
+
+    .o-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+
+}
+
+/* Tablet Styles (601px to 900px) */
+@media (min-width: 601px) and (max-width: 900px) {
+
+    .o-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+    }
+    /* Other styles as previously defined */
+}
+
+
+
+
+
 .c-loading_screen{
     display: flex;
     flex-direction: column;
@@ -499,7 +607,21 @@ a:focus {
 
 .c-body{
     display: none;
+    max-width: 100%;
+    
 }
+
+body.dark-mode .c-body {
+    background-color: var(--global-color-neutral-1000); /* Dark mode background color */
+    color: var(--global-color-neutral-100); /* Light text color for contrast */
+}
+
+body.dark-mode .c-modal-content {
+    background-color: var(--global-color-neutral-1000);
+    border: 1px solid var(--global-color-neutral-800);
+    color: #e0e0e0; /* Light text color for contrast in dark mode */
+}
+
 
 
 .c-modal-box{
@@ -520,6 +642,7 @@ a:focus {
 .c-modal-header {
     display: grid;
     grid-template-columns: 0.5fr 1fr 0.1fr;
+    padding-bottom: 1rem;
 }
 
 .c-modal-close {
@@ -529,9 +652,10 @@ a:focus {
 
 .c-header{
     display: grid;
-    grid-template-columns: 1.9fr 0.3fr;
+    grid-template-columns: 1.9fr 0.3fr 0.3fr;
     gap: 2rem;
     max-width: 100%;
+    box-sizing: border-box;
 
 }
 
@@ -573,6 +697,15 @@ a:focus {
     padding-right: 1rem;
 }
 
+
+.c-favoritebutton{
+    max-width: 10%;
+    max-height: 10%;
+    position: relative;
+    left: 90%;
+    
+    
+}
 
 
 
@@ -646,6 +779,8 @@ a:focus {
     display: flex;
     padding: 0rem, 1rem, 0rem, 1rem;
     gap: 1rem;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .c-input {
@@ -672,6 +807,7 @@ a:focus {
     position: relative;
     display: block;
     width: 10rem; 
+    background-color: white;
 }
 
 
@@ -710,10 +846,9 @@ a:focus {
     border: 1px solid #ccc; 
     border-radius: 5px;
     cursor: pointer;
-    overflow: hidden;
+    overflow: hidden; /* Ensure content does not overflow */
     min-width: 100px;
     min-height: 150px;
-    cursor: pointer;
 }
 
 .c-game:hover {
@@ -721,6 +856,7 @@ a:focus {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+/* Title styling */
 .c-title {
     position: absolute;
     bottom: 0;
@@ -730,13 +866,76 @@ a:focus {
     color: black;
     font-size: 1rem;
     font-weight: bold;
-    background-color: rgba(211, 211, 211, 0.5);
+    background-color: rgba(211, 211, 211, 0.5); /* Semi-transparent background color */
     padding: 0.5rem;
     text-align: center;
+    visibility: hidden; 
+    opacity: 0; 
+    transform: translateY(100%); 
+    transition: opacity 0.1s ease-in-out, visibility 0.5s ease-in-out, transform 0.5s ease-in-out; /* Smooth transitions */
+    overflow: hidden; 
+    z-index: 1; 
+}
+
+/* Title background effect */
+.c-title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1); 
+    transform: scaleY(0); 
+    transform-origin: bottom; 
+    transition: transform 0.1s ease-in-out; 
+    z-index: -1; 
+}
+
+/* Hover effect for title */
+.c-game:hover .c-title {
+    visibility: visible; 
+    opacity: 1; 
+    transform: translateY(0); 
+}
+
+.c-game:hover .c-title::before {
+    transform: scaleY(1);
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(100%); 
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); 
+    }
 }
 
 
+@media (max-width: 768px) {
+    .c-header {
+        display: flex;
+        flex-direction: column; /* Stack elements vertically */
+        gap: 1rem;
+    }
 
+    .c-filters {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .c-search__container {
+        width: 100%;
+    }
+
+    .c-filters {
+        width: 100%;
+    }
+}
 
 
 
@@ -755,17 +954,22 @@ a:focus {
     justify-content: center;
     align-items: center;
     
+    
 }
 
-.c-modal-platforms-list{
+.c-modal-platforms-list {
     display: flex;
+    flex-wrap: wrap; 
     gap: 0.5rem;
     list-style-type: none;
     margin: 0;
     padding: 0;
-
 }
 
+.c-modal-platforms-list li {
+    flex: 1 1 calc(33.33% - 0.5rem); 
+    margin-bottom: 0.5rem; 
+}
 
 .c-modal-genres-list{
     list-style-type:none;
@@ -777,6 +981,10 @@ a:focus {
 .c-modal.active {
     opacity: 1; 
     pointer-events: auto; 
+}
+
+.svg-path {
+    transition: fill 0.2s ease-in-out; /* Adjust timing as needed */
 }
 
 .c-modal-content {
@@ -803,6 +1011,10 @@ a:focus {
     }
 }
 
+
+.c-button{
+    max-width: 30%;
+}
 
 
 
