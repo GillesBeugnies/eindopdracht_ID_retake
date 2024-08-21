@@ -347,7 +347,7 @@ const showGames = function(games) {
     
     }
     const gameContainer = document.querySelector('.game-range'); 
-    const stockImage = '/Img/stock.jpg'; 
+    const stockImage = 'Img/stock.jpg'; 
 
     let loadedImages = 0;
     const totalImages = games.length;
