@@ -506,11 +506,8 @@ a:focus {
     display: flex;
     width: 100%;
     flex-direction: column;
-    gap: 1rem;
+    gap: var("--global-whitespace-md");
     height: 80vh;
-
-
-
 }
 
 .c-main{
@@ -547,9 +544,7 @@ a:focus {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-        /* margin: 1rem; */
     
-
 }
 
 
@@ -567,8 +562,7 @@ a:focus {
 .c-modal-score{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin-bottom: 0px;
-    /* center the items */
+    margin-bottom: 0rem;
     align-items: center;
     justify-items: center;
 
@@ -590,7 +584,7 @@ a:focus {
     
     width: 20%;
     padding: 1rem;
-    border-radius: 5px;
+    border-radius: var(--global-border-radius);
     color: var(--global-color-neutral-050);
     /* bordershadow */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -601,13 +595,13 @@ a:focus {
     display: flex;
     align-items: center;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: var(--global-border-radius);
     overflow: hidden;
     min-width: 60vw;
 }
 .c-search__bar {
     border: none;
-    padding: 10px;
+    padding: 0.625rem;
     flex-grow: 1;
     outline: none;
     
@@ -622,7 +616,7 @@ a:focus {
 .c-search-button {
     background-color: #fff;
     border: none;
-    padding: 10px;
+    padding: var(--global-whitespace-sm);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -630,8 +624,8 @@ a:focus {
 }
 
 .c-search-button svg {
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
 .c-search-button:focus, .c-search__bar:focus {
@@ -657,15 +651,15 @@ a:focus {
 .c-input {
 
     width: 10%;
-    padding: 12px 20px; /* More padding for a modern look */
+    padding: 0.75rem 1.25rem; 
     border: 1px solid #ccc;
-    border-radius: 12px; /* Rounder corners */
-    font-size: 16px;
-    background-color: #fff;
-    appearance: none; /* Remove default styling for select */
+    border-radius: 0.75rem; 
+    font-size: var(--global-fontsize-md);
+    background-color: var(--global-color-neutral-050);
+    appearance: none; 
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for a modern touch */
-    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    transition: border-color 0.3s, box-shadow 0.3s; 
 
 }
 
@@ -677,27 +671,27 @@ a:focus {
 .c-custom-select {
     position: relative;
     display: block;
-    width: 10rem; /* Set desired width */
+    width: 10rem; 
 }
 
-/* Custom dropdown symbol styling */
+
 .c-custom-select__symbol {
     position: absolute;
     top: 50%;
-    right: 15px; /* Adjust based on padding */
+    right: 15px; 
     transform: translateY(-50%);
-    font-size: 16px; /* Adjust as needed */
-    color: #333; /* Fill color */
-    pointer-events: none; /* Prevents interference with select */
+    font-size: var(--global-fontsize-md); 
+    color: #333; 
+    pointer-events: none; 
 }
 
 /* Ensure the select element covers the entire container */
 .c-custom-select select {
     width: 100%;
-    padding-right: 40px; /* Account for the width of the custom symbol */
+    padding-right: 2.5rem; /* Account for the width of the custom symbol */
     border: none; /* Remove default border */
-    border-radius: 12px; /* Match border radius with the container */
-    background-color: transparent; /* Ensure background is transparent */
+    border-radius: var(--global-border-radius); 
+    background-color: transparent; 
 }
 
 .c-modal-rating-chart{
@@ -710,10 +704,10 @@ a:focus {
 .c-game {
     position: relative;
     display: inline-block;
-    margin: 10px;
-    padding: 20px;
-    background-color: #f0f0f0; /* or any color you want for the button */
-    border: 1px solid #ccc; /* or any border you want for the button */
+    margin: 0.625rem;
+    padding: 1.25rem;
+    background-color: var(--global-color-neutral-050);
+    border: 1px solid #ccc; 
     border-radius: 5px;
     cursor: pointer;
     overflow: hidden;
@@ -765,7 +759,7 @@ a:focus {
 
 .c-modal-platforms-list{
     display: flex;
-    gap: 8px;
+    gap: 0.5rem;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -781,21 +775,21 @@ a:focus {
 
 
 .c-modal.active {
-    opacity: 1; /* Show modal */
-    pointer-events: auto; /* Allow interactions */
+    opacity: 1; 
+    pointer-events: auto; 
 }
 
 .c-modal-content {
     display: flex;
-    background-color: #fefefe;
+    background-color: var(--global-color-neutral-050);
     padding: 1.25rem;
-    border: 1px solid #888;
+    border: 1px solid var(--global-color-neutral-400);
     width: 50%;
     overflow-y: scroll;
     justify-content: center;
     align-items: center;
     position: relative;
-    border-radius: 10px;
+    border-radius: var(--global-border-radius-sm);
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     animation: zoom 0.3s;
 }
